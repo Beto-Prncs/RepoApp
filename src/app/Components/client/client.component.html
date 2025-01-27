@@ -1,0 +1,42 @@
+<div class="client-dashboard">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-section">
+        <img src="icons/logo_RepoS.png" alt="Logo" class="logo">
+        <h1>Panel Cliente</h1>
+      </div>
+      <button class="menu-button">
+        <span class="menu-icon"></span>
+      </button>
+    </header>
+   
+    <!-- Main Content -->
+    <div class="content">
+      <div class="status-banner">
+        <img src="icons/client-banner.jpg" alt="Estado" class="banner-img">
+      </div>
+   
+      <div class="dashboard-grid">
+        <div class="dashboard-card" (click)="changeView('requested')">
+          <div class="card-icon request-icon">
+            <img src="icons/pending.png" alt="Solicitudes">
+          </div>
+          <h3>Trabajos Solicitados</h3>
+        </div>
+   
+        <div class="dashboard-card" (click)="changeView('completed')">
+          <div class="card-icon completed-icon">
+            <img src="icons/completed.png" alt="Completados">
+          </div>
+          <h3>Trabajos Realizados</h3>
+        </div>
+   
+        <div class="dashboard-card" (click)="changeView('settings')">
+          <div class="card-icon settings-icon">
+            <img src="icons/settings.png" alt="Configuración">
+          </div>
+          <h3>Configuración</h3>
+        </div>
+      </div>
+    </div>
+   </div>

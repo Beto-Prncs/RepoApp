@@ -1,0 +1,61 @@
+<div class="admin-config-container">
+  <aside class="sidebar">
+    <ul class="sidebar-menu">
+      <li><a href="#" class="active">Configuración General</a></li>
+      <li><a href="#">Gestión de Usuarios</a></li>
+      <li><a href="#">Seguridad</a></li>
+      <li><a href="#">Notificaciones</a></li>
+      <li><a href="#">Integración</a></li>
+    </ul>
+  </aside>
+
+  <main class="config-content">
+    <section class="config-section">
+      <h2>Configuración General</h2>
+      <form (ngSubmit)="saveConfiguration()">
+        <div class="form-group">
+          <label for="company-name">Nombre de la Empresa</label>
+          <input 
+            type="text" 
+            id="company-name" 
+            class="form-control" 
+            [(ngModel)]="companyName" 
+            name="companyName"
+            placeholder="Ingrese nombre de la empresa"
+          >
+        </div>
+
+        <!-- Repite para otros campos del formulario -->
+
+        <div class="form-group">
+          <label>Tema</label>
+          <div class="theme-toggle">
+            <label class="toggle-label">
+              <input 
+                type="radio" 
+                [(ngModel)]="theme" 
+                name="theme" 
+                value="light" 
+                checked
+              >
+              <span>Claro</span>
+            </label>
+            <label class="toggle-label">
+              <input 
+                type="radio" 
+                [(ngModel)]="theme" 
+                name="theme" 
+                value="dark"
+              >
+              <span>Oscuro</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn">Guardar Configuración</button>
+        </div>
+      </form>
+    </section>
+  </main>
+</div>

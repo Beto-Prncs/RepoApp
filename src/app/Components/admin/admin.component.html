@@ -1,0 +1,55 @@
+<!-- dashboard.component.html -->
+<div class="dashboard-container">
+    <header class="header">
+      <div>
+        <img src="icons/logo_RepoS.png" alt="Analytics Preview" class="ImgRegural">
+        
+      </div>
+      <h1>Repo System</h1> 
+      
+      <div class="header-controls">
+        <button class="menu-button">
+          <span class="menu-icon"></span>
+        </button>
+      </div>
+    </header>
+  
+    <div class="analytics-preview">
+      <img src="icons/reportA.jpg" alt="Analytics Preview" class="ImgRegural">
+    </div>
+  
+    <div class="dashboard-grid">
+      <div class="dashboard-card" routerLink="/create-account" (click)="getCreateAcount()">
+        <div class="card-icon create-account-icon">
+          <i class="user-plus-icon"></i>
+          <img src="icons/persona.png" alt="create-account">
+
+        </div>
+        <h3>Crear cuenta</h3>
+      </div>
+  
+      <div class="dashboard-card" routerLink="/settings" (click)="getConfiguration()">
+        <div class="card-icon settings-icon">
+          <i class="settings-gear-icon"></i>
+          <img src="icons/tools.png" alt="create-account">
+        </div>
+        <h3>Configuración</h3>
+      </div>
+  
+      <div class="dashboard-card" routerLink="/reports" (click)="getReports()">
+        <div class="card-icon reports-icon">
+          <i class="clipboard-icon"></i>
+          <img src="icons/report.png" alt="create-account">
+        </div>
+        <h3>Reportes</h3>
+      </div>
+  
+      <div class="dashboard-card" routerLink="/statistics" (click)="getStatistics()">
+        <div class="card-icon statistics-icon">
+          <i class="chart-icon"></i>
+          <img src="icons/estadistica.png" alt="create-account">
+        </div>
+        <h3>Estadísticas</h3>
+      </div>
+    </div>
+  </div>

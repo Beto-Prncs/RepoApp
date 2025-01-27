@@ -1,0 +1,56 @@
+<div class="tasks-container">
+    <div class="task-form">
+      <h2>Asignar Nueva Tarea</h2>
+      <form (ngSubmit)="assignTask()">
+        <div class="form-group">
+          <label>Título</label>
+          <input type="text" [(ngModel)]="newTask.title" name="title" required>
+        </div>
+
+        <div class="form-group">
+          <label>Descripción</label>
+          <textarea [(ngModel)]="newTask.description" name="description" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Asignar a</label>
+          <select [(ngModel)]="newTask.assignedTo" name="assignedTo" required>
+            <option value="">Seleccionar trabajador</option>
+            <option *ngFor="let worker of workers" [value]="worker.id">
+              {{worker.name}}
+            </option>
+          </select>
+        </div>
+
+        <button type="submit" [disabled]="!isFormValid()">Asignar Tarea</button>
+      </form>
+    </div>
+
+    <div class="tasks-list">
+      <h2>Tareas Pendientes</h2>
+      
+      <div class="tasks-grid">
+        <div *ngFor="let task of pendingTasks" class="task-card">
+          <div class="task-header">
+            <h3>{{task.title}}</h3>
+            <span class="task-date">{{task.createdAt | date}}</span>
+          </div>
+          
+          <p class="task-description">{{task.description}}</p>
+          
+          <div class="task-footer">
+            <span class="assigned-to">Asignado a: {{getWorkerName(task.assignedTo)}}</span>
+            
+            <div class="task-actions">
+              <button (click)="editTask(task)" class="btn-edit">
+                Editar
+              </button>
+              <button (click)="deleteTask(task.id)" class="btn-delete">
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

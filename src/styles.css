@@ -1,0 +1,76 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn-back {
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .btn-back {
+    background: linear-gradient(
+      135deg, 
+      rgba(255, 255, 255, 0.1) 0%, 
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(229, 231, 235, 0.2);
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 2px 6px rgba(0, 0, 0, 0.03);
+  }
+  
+  .btn-back:hover {
+    background: linear-gradient(
+      135deg, 
+      rgba(59, 130, 246, 0.1) 0%, 
+      rgba(59, 130, 246, 0.05) 100%
+    );
+    border-color: rgba(59, 130, 246, 0.3);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.07),
+      0 2px 4px rgba(0, 0, 0, 0.04);
+  }
+  
+  .btn-back svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--text-secondary);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-back:hover svg {
+    stroke: var(--primary-color);
+    transform: translateX(-3px);
+  }
+  
+  .btn-back:focus {
+    outline: 2px solid rgba(59, 130, 246, 0.3);
+    outline-offset: 2px;
+  }
+  
+  .btn-back:active {
+    transform: translateY(0);
+    box-shadow: 
+      0 1px 2px rgba(0, 0, 0, 0.05),
+      0 1px 3px rgba(0, 0, 0, 0.03);
+  }
