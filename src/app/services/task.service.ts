@@ -36,14 +36,14 @@ export class TaskService {
   completeTask(taskId: string): void {
     const currentTasks = this.tasksSubject.getValue();
     const updatedTasks = currentTasks.map(task => 
-      task.id === taskId ? {...task, status: 'completed'} : task
+      task.id === taskId ? {...task, status: 'completed' as const} : task
     );
-    this.tasksSubject.next([...updatedTasks]);
+    this.tasksSubject.next(updatedTasks);
   }
 
   deleteTask(taskId: string): void {
     const currentTasks = this.tasksSubject.getValue();
     const updatedTasks = currentTasks.filter(task => task.id !== taskId);
-    this.tasksSubject.next([...updatedTasks]);
+    this.tasksSubject.next(updatedTasks);
   }
 }

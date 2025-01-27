@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { TaskService } from '../services/task.service';
-import { Task } from '../models/task.model';
+import { CommonModule } from '@angular/common';
+import { TaskService, Task } from '../../services/task.service';
 
 @Component({
   selector: 'app-worker-pendingtask',
-  templateUrl: './worker-pendingtask.component.html'
+  templateUrl: './worker-pendingtask.component.html',
+  standalone: true,
+  imports: [CommonModule]
 })
 export class WorkerPendingtaskComponent implements OnInit {
   pendingTasks$: Observable<Task[]>;
