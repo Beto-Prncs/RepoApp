@@ -1,61 +1,192 @@
 <div class="admin-config-container">
-  <aside class="sidebar">
-    <ul class="sidebar-menu">
-      <li><a href="#" class="active">Configuración General</a></li>
-      <li><a href="#">Gestión de Usuarios</a></li>
-      <li><a href="#">Seguridad</a></li>
-      <li><a href="#">Notificaciones</a></li>
-      <li><a href="#">Integración</a></li>
-    </ul>
-  </aside>
-
-  <main class="config-content">
-    <section class="config-section">
-      <h2>Configuración General</h2>
-      <form (ngSubmit)="saveConfiguration()">
-        <div class="form-group">
-          <label for="company-name">Nombre de la Empresa</label>
-          <input 
-            type="text" 
-            id="company-name" 
-            class="form-control" 
-            [(ngModel)]="companyName" 
-            name="companyName"
-            placeholder="Ingrese nombre de la empresa"
-          >
-        </div>
-
-        <!-- Repite para otros campos del formulario -->
-
-        <div class="form-group">
-          <label>Tema</label>
-          <div class="theme-toggle">
-            <label class="toggle-label">
-              <input 
-                type="radio" 
-                [(ngModel)]="theme" 
-                name="theme" 
-                value="light" 
-                checked
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li>
+          <a [class.active]="activeSection === 'general'" 
+             (click)="setActiveSection('general')"
+             href="javascript:void(0)">
+             Configuración General
+          </a>
+        </li>
+        <li>
+          <a [class.active]="activeSection === 'notifications'" 
+             (click)="setActiveSection('notifications')"
+             href="javascript:void(0)">
+             Notificaciones
+          </a>
+        </li>
+        <li>
+          <a [class.active]="activeSection === 'regional'" 
+             (click)="setActiveSection('regional')"
+             href="javascript:void(0)">
+             Configuración Regional
+          </a>
+        </li>
+        <li>
+          <a [class.active]="activeSection === 'advanced'" 
+             (click)="setActiveSection('advanced')"
+             href="javascript:void(0)">
+             Configuración Avanzada
+          </a>
+        </li>
+      </ul>
+    </aside>
+  
+    <main class="config-content">
+      <form #configForm="ngForm" (ngSubmit)="saveConfiguration()">
+        <!-- Configuración General -->
+        <section class="config-section" [ngClass]="{'active': activeSection === 'general'}" 
+                 *ngIf="activeSection === 'general'">
+          <h2>Configuración General</h2>
+          <div class="form-group">
+            <label for="company-name">Nombre de la Empresa</label>
+            <input
+              type="text"
+              id="company-name"
+              class="form-control"
+              [(ngModel)]="config.name"
+              name="companyName"
+              placeholder="Ingrese nombre de la empresa"
+              required
+            >
+          </div>
+  
+          <div class="form-group">
+            <label>Tema de la Aplicación</label>
+            <div class="theme-toggle">
+              <label class="toggle-label">
+                <input
+                  type="radio"
+                  [(ngModel)]="config.theme"
+                  name="theme"
+                  value="light"
+                >
+                <span class="toggle-text">Claro</span>
+              </label>
+              <label class="toggle-label">
+                <input
+                  type="radio"
+                  [(ngModel)]="config.theme"
+                  name="theme"
+                  value="dark"
+                >
+                <span class="toggle-text">Oscuro</span>
+              </label>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input
+                type="checkbox"
+                [(ngModel)]="config.autoSave"
+                name="autoSave"
               >
-              <span>Claro</span>
-            </label>
-            <label class="toggle-label">
-              <input 
-                type="radio" 
-                [(ngModel)]="theme" 
-                name="theme" 
-                value="dark"
-              >
-              <span>Oscuro</span>
+              <span class="checkbox-text">Auto-guardar cambios</span>
             </label>
           </div>
-        </div>
-
-        <div class="form-group">
-          <button type="submit" class="btn">Guardar Configuración</button>
+        </section>
+  
+        <!-- Notificaciones -->
+        <section class="config-section" [ngClass]="{'active': activeSection === 'notifications'}"
+                 *ngIf="activeSection === 'notifications'">
+          <h2>Notificaciones</h2>
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input
+                type="checkbox"
+                [(ngModel)]="config.emailNotifications"
+                name="emailNotifications"
+              >
+              <span class="checkbox-text">Recibir notificaciones por email</span>
+            </label>
+          </div>
+          <div class="form-group" *ngIf="config.emailNotifications">
+            <label for="notification-email">Email para notificaciones</label>
+            <input
+              type="email"
+              id="notification-email"
+              class="form-control"
+              [(ngModel)]="config.emailNotifications"
+              name="notificationEmail"
+              placeholder="correo@ejemplo.com"
+            >
+          </div>
+        </section>
+  
+        <!-- Configuración Regional -->
+        <section class="config-section" [ngClass]="{'active': activeSection === 'regional'}"
+                 *ngIf="activeSection === 'regional'">
+          <h2>Configuración Regional</h2>
+          <div class="form-group">
+            <label for="language">Idioma</label>
+            <select
+              id="language"
+              class="form-control"
+              [(ngModel)]="config.language"
+              name="language"
+              required
+            >
+              <option value="">Seleccione un idioma</option>
+              <option *ngFor="let lang of languages" [value]="lang">{{lang}}</option>
+            </select>
+          </div>
+  
+          <div class="form-group">
+            <label for="timezone">Zona Horaria</label>
+            <select
+              id="timezone"
+              class="form-control"
+              [(ngModel)]="config.timezone"
+              name="timezone"
+              required
+            >
+              <option value="">Seleccione una zona horaria</option>
+              <option *ngFor="let tz of timezones" [value]="tz">{{tz}}</option>
+            </select>
+          </div>
+  
+          <div class="form-group">
+            <label for="dateFormat">Formato de Fecha</label>
+            <select
+              id="dateFormat"
+              class="form-control"
+              [(ngModel)]="config.dateFormat"
+              name="dateFormat"
+              required
+            >
+              <option value="">Seleccione un formato</option>
+              <option *ngFor="let format of dateFormats" [value]="format">
+                {{format}}
+              </option>
+            </select>
+          </div>
+        </section>
+  
+        <!-- Configuración Avanzada -->
+        <section class="config-section" [ngClass]="{'active': activeSection === 'advanced'}"
+                 *ngIf="activeSection === 'advanced'">
+          <h2>Configuración Avanzada</h2>
+          <div class="button-group">
+            <button type="button" class="btn btn-secondary" (click)="exportConfiguration()">
+              Exportar Configuración
+            </button>
+            <button type="button" class="btn btn-danger" (click)="resetConfiguration()">
+              Restablecer Configuración
+            </button>
+          </div>
+        </section>
+  
+        <!-- Botones de acción -->
+        <div class="action-buttons">
+          <button type="button" class="btn btn-secondary" (click)="goBack()">
+            Volver
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="!configForm.form.valid">
+            Guardar Cambios
+          </button>
         </div>
       </form>
-    </section>
-  </main>
-</div>
+    </main>
+  </div>
+  

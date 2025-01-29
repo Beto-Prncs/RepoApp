@@ -1,98 +1,249 @@
-:host {
-    display: block;
-    width: 100%;
-  }
-  
-  :root {
-    --primary-color: #2c3e50;
-    --secondary-color: #3498db;
-    --background-color: #ecf0f1;
-    --text-color: #333;
-  }
-  
+/* Definición de colores principales */
+:root {
+  --primary-color: #1D4ED8; /* Azul claro para texto y enlaces */
+  --secondary-color: #60A5FA; /* Azul brillante para botones y enlaces activos */
+  --background-color: #F9FAFB; /* Gris suave como fondo */
+  --card-background: #FFFFFF; /* Fondo blanco para tarjetas */
+  --text-color: #374151; /* Gris oscuro para texto principal */
+  --border-color: #E5E7EB; /* Gris muy claro para bordes */
+  --hover-color: rgba(96, 165, 250, 0.2); /* Azul suave para hover */
+}
+
+/* Estructura principal del componente */
+.admin-config-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr; /* Sidebar + Área de configuración */
+  gap: 30px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: var(--card-background);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  margin-bottom: 18px;
+}
+
+.sidebar-menu a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 10px;
+  transition: background-color 0.3s, color 0.3s;
+  display: block;
+  background-color: transparent;
+  position: relative;
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+  background-color: var(--secondary-color);
+  color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Área de contenido de configuración */
+.config-content {
+  background-color: var(--card-background);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  font-size: 1.6rem;
+  color: var(--primary-color);
+  margin-bottom: 12px;
+  font-weight: 700;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 12px;
+}
+
+/* Formulario y campos */
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.form-control {
+  padding: 12px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: var(--secondary-color);
+  outline: none;
+}
+
+/* Estilos para el toggle de temas */
+.theme-toggle {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.toggle-text {
+  font-size: 0.875rem;
+  color: var(--text-color);
+}
+
+/* Checkbox para opciones */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.checkbox-text {
+  color: var(--text-color);
+}
+
+/* Estilos para los botones de acción */
+.btn {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 12px 30px;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:hover {
+  background-color: #2563eb;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-danger {
+  background-color: #ef4444;
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+}
+
+.btn-secondary {
+  background-color: #64748b;
+}
+
+.btn-secondary:hover {
+  background-color: #475569;
+}
+
+.action-buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+}
+
+/* Configuración de acción de botones (en dispositivos pequeños) */
+@media (max-width: 768px) {
   .admin-config-container {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    grid-template-columns: 1fr;
   }
-  
+
   .sidebar {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    margin-bottom: 20px;
   }
-  
-  .sidebar-menu {
-    list-style: none;
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: stretch;
   }
-  
+
   .sidebar-menu li {
-    margin-bottom: 10px;
+    font-size: 1rem;
   }
-  
-  .sidebar-menu a {
-    text-decoration: none;
-    color: var(--primary-color);
-    display: block;
-    padding: 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .sidebar-menu a:hover, .sidebar-menu a.active {
-    background-color: var(--secondary-color);
-    color: white;
-  }
-  
-  .config-content {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
+
   .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    font-size: 1rem;
   }
-  
+
   .form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 12px;
+    font-size: 1rem;
   }
-  
+
   .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: var(--secondary-color);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
   }
-  
-  .btn:hover {
-    background-color: #2980b9;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .admin-config-container {
-      grid-template-columns: 1fr;
-    }
-  
-    .sidebar {
-      margin-bottom: 20px;
-    }
-  }
+}
+
+/* Submenú en notificaciones */
+.notification-email-wrapper {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.notification-email-wrapper input[type='email'] {
+  padding: 10px 16px;
+}
+
+.notification-email-wrapper label {
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.select-box {
+  background-color: var(--card-background);
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s;
+}
+
+.select-box:focus {
+  border-color: var(--secondary-color);
+  outline: none;
+}
