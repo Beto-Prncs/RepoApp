@@ -1,1 +1,41 @@
-<p>worker-pendingtask works!</p>
+<div class="tasks-container">
+    <div *ngFor="let task of pendingTasks$ | async" class="task-card">
+      <h3>{{task.title}}</h3>
+      <p>{{task.description}}</p>
+      <button (click)="openCompletionForm(task)">Completar Tarea</button>
+    </div>
+
+    <div *ngIf="selectedTask" class="completion-form">
+      <h2>Completar Tarea: {{selectedTask.title}}</h2>
+      <form (ngSubmit)="completeTask()">
+        <div class="worker-info">
+          <input [(ngModel)]="completionForm.workerName" name="workerName" placeholder="Nombre del trabajador">
+          <input [(ngModel)]="completionForm.workerPosition" name="workerPosition" placeholder="Cargo">
+        </div>
+
+        <div class="company-info">
+          <input [(ngModel)]="completionForm.companyName" name="companyName" placeholder="Nombre de la empresa">
+          <input [(ngModel)]="completionForm.companyAddress" name="companyAddress" placeholder="Dirección">
+        </div>
+
+        <div class="task-details">
+          <p><strong>Descripción original:</strong> {{selectedTask.description}}</p>
+          <textarea [(ngModel)]="completionForm.finalStatus" name="finalStatus" placeholder="Estado final"></textarea>
+        </div>
+
+        <div class="materials">
+          <h3>Materiales utilizados</h3>
+          <div *ngFor="let material of completionForm.materialsUsed; let i = index">
+            <input [(ngModel)]="completionForm.materialsUsed[i]" [name]="'material'+i">
+            <button type="button" (click)="removeMaterial(i)">Eliminar</button>
+          </div>
+          <button type="button" (click)="addMaterial()">Agregar material</button>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" (click)="cancelCompletion()">Cancelar</button>
+          <button type="submit">Completar Tarea</button>
+        </div>
+      </form>
+    </div>
+  </div>

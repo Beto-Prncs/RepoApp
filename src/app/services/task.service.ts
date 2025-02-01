@@ -10,6 +10,25 @@ export interface Task {
   assignedTo: string;
   createdAt: Date;
 }
+export interface TaskCompletion {
+  workerName: string;
+  workerPosition: string;
+  companyName: string;
+  companyAddress: string;
+  finalStatus: string;
+  materialsUsed: string[];
+  completionDate: Date;
+}
+
+export interface Task {
+  id: string;
+  title: string;
+  description: string;
+  status: 'pending' | 'completed';
+  assignedTo: string;
+  createdAt: Date;
+  completionDetails?: TaskCompletion;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -46,4 +65,5 @@ export class TaskService {
     const updatedTasks = currentTasks.filter(task => task.id !== taskId);
     this.tasksSubject.next(updatedTasks);
   }
+  
 }
